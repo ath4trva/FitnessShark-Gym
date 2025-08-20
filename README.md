@@ -1,12 +1,41 @@
-# React + Vite
+# 🦈 FitnessShark - Gym Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive, and aesthetic **landing page** for a gym called **FitnessShark**.  
+Built with **React**, **Tailwind CSS**, and **React Scroll**, the project focuses on smooth user experience, clean design, and mobile responsiveness.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ⚡ **Fast and Responsive** – Optimized for all devices (desktop, tablet, mobile)  
+- 🎨 **Tailwind Styling** – Utility-first CSS for quick and modern design  
+- 🖱️ **Smooth Scroll** – Section navigation powered by `react-scroll`  
+- 🖼️ **Hero Section** – Highlighting brand identity  
+- 📋 **Services Section** – Display gym offerings (Zumba, Personal Training, etc.)  
+- ⭐ **Reviews Section** – Showcase client testimonials and experiences  
+- 📞 **Contact Section** – Easy call-to-action for joining or inquiries  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- [React](https://reactjs.org/) – Component-based UI library  
+- [Tailwind CSS](https://tailwindcss.com/) – Modern utility-first CSS framework  
+- [React Scroll](https://www.npmjs.com/package/react-scroll) – Smooth scrolling navigation  
+- [Lucide Icons](https://lucide.dev/) – Clean and modern icons  
+
+---
+
+## 📂 Project Structure
+
+```bash
+fitnessshark/
+│── public/             # Static assets
+│── src/
+│   ├── components/     # Reusable UI components
+│   ├── sections/       # Landing page sections (Hero, Services, Reviews, Contact)
+│   ├── App.jsx         # Root component
+│   ├── main.jsx        # Entry point
+│   └── index.css       # Global styles (Tailwind)
+│── package.json        # Project dependencies
+│── README.md           # Documentation
