@@ -26,7 +26,8 @@ Built with **React**, **Tailwind CSS**, and **React Scroll**, the project focuse
 
 ---
 ## Preview
-./Homepage.png
+
+![Homepage Screenshot](./Homepage.png)
 
 ---
 ## 📂 Project Structure
