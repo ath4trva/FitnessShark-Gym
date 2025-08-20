@@ -25,7 +25,10 @@ Built with **React**, **Tailwind CSS**, and **React Scroll**, the project focuse
 - [Lucide Icons](https://lucide.dev/) – Clean and modern icons  
 
 ---
+## Preview
+./Homepage.png
 
+---
 ## 📂 Project Structure
 
 ```bash
