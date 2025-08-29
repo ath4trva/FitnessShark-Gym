@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const formData = req.body;
     console.log('Form data received:', formData);
 
-    // Validate required fields
+    
     const requiredFields = ['name', 'email', 'phone', 'interest'];
     const missingFields = requiredFields.filter(field => !formData[field] || formData[field].trim() === '');
     
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // UPDATE THIS URL WITH YOUR NEW DEPLOYMENT URL
+    
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwBIVkVM5ku-t49Nri3usR5RfPwqIRUV_ISC8XnqHobiYNchsiyCG29p7OBphobkqU44A/exec';
     
     console.log('Sending to Google Apps Script...');
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     const responseText = await response.text();
     console.log('GAS response text:', responseText);
 
-    // Parse JSON response
+    
     let data;
     try {
       data = JSON.parse(responseText);
@@ -61,4 +61,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
 
