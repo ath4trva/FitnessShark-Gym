@@ -19,7 +19,7 @@ const ContactSection = () => {
     setStatus('Sending...');
 
     try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbxmeE8nfyOYjVagUAyjwDmUNp-N33doRcIVfWN6qz2PhxKV98FZszQzxUnHrgJ0FVN-KA/exec', {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbzTwleZC7WPPm-aKBGi50UHBSRYryKEGoyeCvNXuY_6tFruTn1QZmx8u64FcpW4u6zvqQ/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -154,3 +154,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
