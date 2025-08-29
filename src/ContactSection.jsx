@@ -10,6 +10,7 @@ const ContactSection = () => {
   });
 
   const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -17,26 +18,61 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!form.name || !form.email || !form.phone || !form.interest) {
+      setStatus('Please fill in all fields');
+      return;
+    }
+
+    setIsSubmitting(true);
     setStatus('Sending...');
 
     try {
+      console.log('Submitting form data:', form); // Debug log
+      
       const res = await fetch('/api/submitLead', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
+
+      console.log('Response status:', res.status); // Debug log
+      console.log('Response headers:', res.headers); // Debug log
+
+      // Check if response is ok
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const responseText = await res.text();
+      console.log('Response text:', responseText); // Debug log
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Failed to parse JSON:', parseError);
+        throw new Error('Invalid JSON response from server');
+      }
+
+      console.log('Parsed data:', data); // Debug log
+
       if (data.status === 'success') {
         setStatus('Lead submitted successfully!');
         setForm({ name: '', email: '', phone: '', interest: '' });
       } else {
-        setStatus('Error submitting lead');
+        setStatus(`Error: ${data.message || 'Unknown error occurred'}`);
       }
-    } catch(err){
-  console.error('Fetch error:', err);
-  setStatus('Error submitting lead: ' + err.message);
-}
-
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setStatus(`Error submitting lead: ${err.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,14 +97,15 @@ const ContactSection = () => {
               <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                    Name
+                    Name *
                   </label>
                   <input
-                    autoComplete='on'
+                    autoComplete='name'
                     type="text"
                     id="name"
                     value={form.name}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your name"
                   />
@@ -76,14 +113,15 @@ const ContactSection = () => {
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                    Email
+                    Email *
                   </label>
                   <input
-                    autoComplete='on'
+                    autoComplete='email'
                     type="email"
                     id="email"
                     value={form.email}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your email"
                   />
@@ -91,14 +129,15 @@ const ContactSection = () => {
                 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
-                    Phone number
+                    Phone number *
                   </label>
                   <input
-                    autoComplete='on'
+                    autoComplete='tel'
                     type="tel"
                     id="phone"
                     value={form.phone}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your phone number"
                   />
@@ -106,12 +145,13 @@ const ContactSection = () => {
                 
                 <div>
                   <label htmlFor="interest" className="block text-sm font-medium text-gray-300 mb-1">
-                    Membership interest...
+                    Membership interest... *
                   </label>
                   <select
                     id="interest"
                     value={form.interest}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white"
                   >
                     <option value="" className="bg-gray-800">Select membership type</option>
@@ -124,14 +164,29 @@ const ContactSection = () => {
                 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold py-3 px-4 rounded-md transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                  disabled={isSubmitting}
+                  className={`w-full font-bold py-3 px-4 rounded-md transition-all duration-300 transform shadow-lg ${
+                    isSubmitting 
+                      ? 'bg-gray-600 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 hover:scale-[1.02]'
+                  } text-white`}
                 >
-                  Submit
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </form>
 
               {/* Status Message */}
-              {status && <p className="mt-2 text-green-400">{status}</p>}
+              {status && (
+                <p className={`mt-4 text-sm font-medium ${
+                  status.includes('success') 
+                    ? 'text-green-400' 
+                    : status.includes('Error') || status.includes('error')
+                    ? 'text-red-400'
+                    : 'text-yellow-400'
+                }`}>
+                  {status}
+                </p>
+              )}
             </div>
           </div>
           
