@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     }
 
     // UPDATE THIS URL WITH YOUR NEW DEPLOYMENT URL
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxa9wYO5GZSHY-sGuPMv4Sc0RuVFvdubbYCgP67QdQIqg1dYdrPVCWOxTKZyZ5IrdLHcg/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwBIVkVM5ku-t49Nri3usR5RfPwqIRUV_ISC8XnqHobiYNchsiyCG29p7OBphobkqU44A/exec';
     
     console.log('Sending to Google Apps Script...');
 
@@ -61,3 +61,4 @@ export default async function handler(req, res) {
     });
   }
 }
+
