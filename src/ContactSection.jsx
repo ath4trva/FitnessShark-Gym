@@ -1,6 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ContactSection = () => {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    interest: ''
+  });
+
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+
+    try {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbxmeE8nfyOYjVagUAyjwDmUNp-N33doRcIVfWN6qz2PhxKV98FZszQzxUnHrgJ0FVN-KA/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.status === 'success') {
+        setStatus('Lead submitted successfully!');
+        setForm({ name: '', email: '', phone: '', interest: '' });
+      } else {
+        setStatus('Error submitting lead');
+      }
+    } catch(err){
+  console.error('Fetch error:', err);
+  setStatus('Error submitting lead: ' + err.message);
+}
+
+  };
+
   return (
     <div id="contact" className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-16 lg:py-20">
@@ -20,15 +57,17 @@ const ContactSection = () => {
                 Claim your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-300">7 day free trial</span>
               </h2>
               
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Name
                   </label>
                   <input
-                  autoComplete='on'
+                    autoComplete='on'
                     type="text"
                     id="name"
+                    value={form.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your name"
                   />
@@ -39,9 +78,11 @@ const ContactSection = () => {
                     Email
                   </label>
                   <input
-                  autoComplete='on'
+                    autoComplete='on'
                     type="email"
                     id="email"
+                    value={form.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your email"
                   />
@@ -55,6 +96,8 @@ const ContactSection = () => {
                     autoComplete='on'
                     type="tel"
                     id="phone"
+                    value={form.phone}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-400"
                     placeholder="Your phone number"
                   />
@@ -66,6 +109,8 @@ const ContactSection = () => {
                   </label>
                   <select
                     id="interest"
+                    value={form.interest}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white"
                   >
                     <option value="" className="bg-gray-800">Select membership type</option>
@@ -83,6 +128,9 @@ const ContactSection = () => {
                   Submit
                 </button>
               </form>
+
+              
+              {status && <p className="mt-2 text-green-400">{status}</p>}
             </div>
           </div>
           
