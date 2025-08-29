@@ -4,7 +4,7 @@ export default async function handler(req, res) {
       const formData = req.body;
 
       
-      const GAS_URL = 'https://script.google.com/macros/s/AKfycbzTwleZC7WPPm-aKBGi50UHBSRYryKEGoyeCvNXuY_6tFruTn1QZmx8u64FcpW4u6zvqQ/exec';
+      const GAS_URL = 'https://script.google.com/macros/s/AKfycbyiue5U81lZ2BNXgQOPlHd74uCe3wglVwtGOCvwaiwqixofWu1FTNWla73C6AhtjiAxOQ/exec';
 
       const response = await fetch(GAS_URL, {
         method: 'POST',
@@ -23,3 +23,4 @@ export default async function handler(req, res) {
     res.status(405).json({ status: 'error', message: 'Method not allowed' });
   }
 }
+
