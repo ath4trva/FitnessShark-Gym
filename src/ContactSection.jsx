@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 
 const ContactSection = () => {
@@ -19,7 +20,7 @@ const ContactSection = () => {
     setStatus('Sending...');
 
     try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbzTwleZC7WPPm-aKBGi50UHBSRYryKEGoyeCvNXuY_6tFruTn1QZmx8u64FcpW4u6zvqQ/exec', {
+      const res = await fetch('/api/submitLead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -129,7 +130,7 @@ const ContactSection = () => {
                 </button>
               </form>
 
-              
+              {/* Status Message */}
               {status && <p className="mt-2 text-green-400">{status}</p>}
             </div>
           </div>
@@ -154,4 +155,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
