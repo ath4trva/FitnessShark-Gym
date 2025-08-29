@@ -44,7 +44,7 @@ Built with **React**, **Tailwind CSS**, and **React Scroll**, the project focuse
 
 **Screenshot of leads in Google Sheets:**  
 
-![Leads Sheet Screenshot](./sheet.png)  
+![Leads Sheet Screenshot](./Sheets.png)  
 
 ---
 
