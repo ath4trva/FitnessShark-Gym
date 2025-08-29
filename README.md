@@ -47,6 +47,9 @@ Built with **React**, **Tailwind CSS**, and **React Scroll**, the project focuse
 ![Leads Sheet Screenshot](./Sheets.png)  
 
 ---
+## Here's the link to FitnessShark
+
+https://fitness-shark-gym.vercel.app/
 
 ## 🛠️ Tech Stack
 
