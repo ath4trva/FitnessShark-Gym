@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzTwleZC7WPPm-aKBGi50UHBSRYryKEGoyeCvNXuY_6tFruTn1QZmx8u64FcpW4u6zvqQ/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxmLdXXK-Lz5vcZ0t87RnGAtZCWoZB91QSuC4-j1TcQtydrm5fX7B3GdYvcWzqiVjqFpw/exec';
     
     console.log('Attempting to send to Google Apps Script...');
     console.log('GAS URL:', GAS_URL);
@@ -114,3 +114,4 @@ export default async function handler(req, res) {
     });
   }
 }
+
