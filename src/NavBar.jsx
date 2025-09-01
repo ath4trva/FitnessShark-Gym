@@ -38,7 +38,7 @@ const NavBar = () => {
           <span className="mr-2">
             <img src={logo} alt="LOGO" className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20" />
           </span>
-          <span className="text-3xl sm:text-3xl md:text-4xl lg:text-lg font-bold text-stone-100">
+          <span className="text-2xl sm:text-2xl md:text-2xl lg:text-lg font-bold text-stone-100">
             FitnessShark
           </span>
         </div>
@@ -263,5 +263,6 @@ const NavBar = () => {
     </nav>
   );
 };
+
 
 export default NavBar;
